@@ -14,15 +14,27 @@ const prisma = new client_1.PrismaClient();
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const result = yield prisma.favouriteMovie.findMany();
-            console.log('Resultado da consulta:', result);
+            const result = yield prisma.favoriteMovie.findMany();
+            console.log("Resultado da consulta:", result);
         }
         catch (error) {
-            console.error('Erro ao consultar o banco de dados:', error);
+            console.error("Erro ao consultar o banco de dados:", error);
         }
         finally {
             yield prisma.$disconnect();
         }
+        const printUsers = () => __awaiter(this, void 0, void 0, function* () {
+            const users = yield prisma.user.findMany();
+            console.log("all users:", users);
+        });
+        const user1 = yield prisma.user.create({
+            data: {
+                email: "teste@gmail.com",
+                passwordHash: 'aa'
+            },
+        });
+        console.log(user1, "created new user");
+        yield printUsers();
     });
 }
 main()
