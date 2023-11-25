@@ -8,6 +8,10 @@
     "db:seed": "prisma db seed",
     "build": "tsc"
   },
+  "compilerOptions": {
+    "outDir": "./dist"
+    
+  },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.15",
