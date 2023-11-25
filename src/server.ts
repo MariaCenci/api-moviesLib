@@ -6,43 +6,18 @@ import cors from "cors";
 //const prisma = new PrismaClient();
 
 
-const prisma = new PrismaClient({
-  datasources: {
+const prisma = new PrismaClient({})
+  /*datasources: {
     db: {
-      url: 'postgresql://ep-patient-night-16675703.us-east-2.aws.neon.tech',
+      url: '"postgresql://MariaCenci:1am4AWzfHCgU@ep-patient-night-16675703-pooler.us-east-2.aws.neon.tech/movieslib-db?sslmode=require&pgbouncer=true"',
     },
   },
-});
+});*/
 
 const server = express();
-//const PORT_SERVER = process.env.PORT_SERVER;
+
 const PORT = 4000
-const baseURL = process.env.BASE_URL || 'http://localhost:4000';
-//const baseURL ='http://localhost:4000';
-/*
-const corsOptions = {
-  origin: 'https://movies-lib-client-9taofdav8-maria-cencis-projects.vercel.app', 
-  optionsSuccessStatus: 200, 
-};
-
-
-*/
-
-/*
-const corsOptions = {
-  origin: '*', // ou '*'
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-};
-server.use(cors(corsOptions));
-*/
-
-
-server.use(cors({
-  origin: 'https://movies-lib-client.vercel.app/',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
+//const baseURL = process.env.BASE_URL || 'http://localhost:4000';
 
 
 server.use(cors());
@@ -56,7 +31,7 @@ server.get(`/`, (req, res) => {
 
 //register
 
-server.post(`${baseURL}/register`, async (req, res) => {
+server.post(`/register`, async (req, res) => {
   try {
     const { email, password } = req.body;
     const passwordHash = await hashSync(password, 10);
@@ -88,7 +63,7 @@ server.post(`${baseURL}/register`, async (req, res) => {
 
 
 // login
-server.post(`${baseURL}/login`, async (req, res) => {
+server.post(`/login`, async (req, res) => {
   try {
     const { email, password, userId } = req.body;
 
@@ -119,7 +94,7 @@ server.post(`${baseURL}/login`, async (req, res) => {
 });
 
 /*get fav movies */
-server.get(`${baseURL}/api/favoriteMovies/:userId`, async (req, res) => {
+server.get(`/api/favoriteMovies/:userId`, async (req, res) => {
   try {
     const { userId } = req.params;
     const movies = await prisma.favoriteMovie.findMany({
@@ -140,7 +115,7 @@ server.get(`${baseURL}/api/favoriteMovies/:userId`, async (req, res) => {
 
 
 // add favorite 
-server.post(`${baseURL}/api/addFavorite`, async (req, res) => {
+server.post(`/api/addFavorite`, async (req, res) => {
   const { userId, movieId, original_title, poster_path } = req.body;
 
   if (typeof userId !== undefined && movieId !== undefined) {
@@ -191,7 +166,7 @@ server.post(`${baseURL}/api/addFavorite`, async (req, res) => {
 
 
 // delete favorites
-server.delete(`${baseURL}/api/removeFavorite`, async (req, res) => {
+server.delete(`/api/removeFavorite`, async (req, res) => {
   const { userId, movieId } = req.body;
 
   try {
@@ -213,7 +188,7 @@ server.delete(`${baseURL}/api/removeFavorite`, async (req, res) => {
       },
     });
 
-    await fetch(`${baseURL}/api/updateFavorites`, {
+    await fetch(`/api/updateFavorites`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -228,7 +203,7 @@ server.delete(`${baseURL}/api/removeFavorite`, async (req, res) => {
 });
 
 //update favorites
-server.put(`${baseURL}/api/updateFavorites`, async (req, res) => {
+server.put(`/api/updateFavorites`, async (req, res) => {
   const { userId } = req.body;
 
 
@@ -252,7 +227,7 @@ server.put(`${baseURL}/api/updateFavorites`, async (req, res) => {
 
 
 // get from watch list
-server.get(`${baseURL}/api/watchList/:userId`, async (req, res) => {
+server.get(`/api/watchList/:userId`, async (req, res) => {
   try {
     const { userId } = req.params;
     const movies = await prisma.watchList.findMany({
@@ -319,7 +294,7 @@ server.post("/api/addToWatchList", async (req, res) => {
 });
 
 // remove from watch list
-server.delete(`${baseURL}/api/removeFromWatchList`, async (req, res) => {
+server.delete(`/api/removeFromWatchList`, async (req, res) => {
   const { userId, movieId } = req.body;
 
   try {
@@ -341,7 +316,7 @@ server.delete(`${baseURL}/api/removeFromWatchList`, async (req, res) => {
       },
     });
 
-    await fetch(`${baseURL}/api/updateWatchList`, {
+    await fetch(`/api/updateWatchList`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -355,7 +330,7 @@ server.delete(`${baseURL}/api/removeFromWatchList`, async (req, res) => {
   }
 });
 
-server.put(`${baseURL}/api/updateWatchList`, async (req, res) => {
+server.put(`api/updateWatchList`, async (req, res) => {
   const { userId } = req.body;
 
 
@@ -382,13 +357,13 @@ server.put(`${baseURL}/api/updateWatchList`, async (req, res) => {
  // console.log(`server initialized at http://localhost:${PORT_SERVER}`);
 //});
 
-
+/*
 server.listen(process.env.PORT || PORT, () => {
   //host: '0.0.0.0',
  //port: process.env.PORT ? Number(process.env.PORT) : 4000
  console.log(`running on ${PORT}`)
 })
-/*
+*/
 server.listen(4000, () => {
   console.log("initialized at 4000")
-})*/
+})

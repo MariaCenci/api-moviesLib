@@ -5,18 +5,18 @@ generator client {
   provider = "prisma-client-js"
 }
 
-//datasource db {
- // provider = "sqlite"
- // url      = env("DATABASE_URL")
-//}
-
-
-
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+ provider = "sqlite"
+ url      = env("DATABASE_URL")
 }
+
+
+
+//datasource db {
+ // provider  = "postgresql"
+ // url  	    = env("DATABASE_URL")
+ // directUrl = env("DIRECT_URL")
+//}
 
 model User {
   userId       String @id @default(cuid())
