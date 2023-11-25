@@ -36,6 +36,15 @@ const corsOptions = {
 };
 server.use(cors(corsOptions));
 */
+
+
+server.use(cors({
+  origin: 'https://movies-lib-client.vercel.app/',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
+
+
 server.use(cors());
 
 server.use(express.json());
