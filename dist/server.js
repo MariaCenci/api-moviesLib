@@ -26,6 +26,7 @@ const prisma = new client_1.PrismaClient({
 });
 const server = (0, express_1.default)();
 //const PORT_SERVER = process.env.PORT_SERVER;
+const PORT = 4000;
 const baseURL = process.env.BASE_URL || 'http://localhost:4000';
 //const baseURL ='http://localhost:4000';
 /*
@@ -328,9 +329,10 @@ server.put(`${baseURL}/api/updateWatchList`, (req, res) => __awaiter(void 0, voi
 //server.listen(PORT_SERVER, () => {
 // console.log(`server initialized at http://localhost:${PORT_SERVER}`);
 //});
-server.listen({
-    host: '0.0.0.0',
-    port: process.env.PORT ? Number(process.env.PORT) : 4000
+server.listen(process.env.PORT || PORT, () => {
+    //host: '0.0.0.0',
+    //port: process.env.PORT ? Number(process.env.PORT) : 4000
+    console.log(`running on ${PORT}`);
 });
 /*
 server.listen(4000, () => {

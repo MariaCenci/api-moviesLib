@@ -6,7 +6,7 @@
     "start": "nodemon --exec ts-node src/server.ts",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
-    "build": "tsc"
+    "build": "./node_modules/typescript/bin/tsc"
   },
   "compilerOptions": {
     "outDir": "./dist"
