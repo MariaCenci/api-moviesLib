@@ -1,0 +1,10 @@
+
+services:
+  - name: api-movies-lib
+    env:
+      - key: NODE_ENV
+        value: production
+    buildCommand: npm install
+    startCommand: npm start
+
+buildCommand: npm run build
