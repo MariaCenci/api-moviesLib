@@ -16,7 +16,7 @@ const prisma = new PrismaClient({
 
 const server = express();
 //const PORT_SERVER = process.env.PORT_SERVER;
-
+const PORT = 4000
 const baseURL = process.env.BASE_URL || 'http://localhost:4000';
 //const baseURL ='http://localhost:4000';
 /*
@@ -383,9 +383,10 @@ server.put(`${baseURL}/api/updateWatchList`, async (req, res) => {
 //});
 
 
-server.listen({
-  host: '0.0.0.0',
-  port: process.env.PORT ? Number(process.env.PORT) : 4000
+server.listen(process.env.PORT || PORT, () => {
+  //host: '0.0.0.0',
+ //port: process.env.PORT ? Number(process.env.PORT) : 4000
+ console.log(`running on ${PORT}`)
 })
 /*
 server.listen(4000, () => {
