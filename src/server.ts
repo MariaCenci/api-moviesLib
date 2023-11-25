@@ -27,14 +27,16 @@ const corsOptions = {
 
 
 */
+
+/*
 const corsOptions = {
   origin: '*', // ou '*'
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 };
 server.use(cors(corsOptions));
-
-//server.use(cors());
+*/
+server.use(cors());
 
 server.use(express.json());
 
